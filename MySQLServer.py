@@ -17,10 +17,12 @@ def create_database():
             cursor.close()
 
     except Error as e:
-        print(f"Error: Unable to connect to MySQL server. {e}")
+        print(f"Failed to connect to MySQL server: {e}")
 
     finally:
-        if connection is not None and connection.is_connected():
-            connection.close()
+        if connection is not None:
+            if connection.is_connected():
+                connection.close()
 
-create_database()
+if __name__ == "__main__":
+    create_database()
